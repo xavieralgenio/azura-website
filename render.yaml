@@ -7,14 +7,12 @@ services:
     startCommand: pnpm start
     envVars:
       - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: 3000
+        sync: false
       - key: SUPABASE_URL
-        value: ${SUPABASE_URL}
+        sync: false
       - key: SUPABASE_SERVICE_ROLE_KEY
-        value: ${SUPABASE_SERVICE_ROLE_KEY}
+        sync: false
       - key: VITE_SUPABASE_URL
-        value: ${VITE_SUPABASE_URL}
+        sync: false
       - key: VITE_SUPABASE_ANON_KEY
-        value: ${VITE_SUPABASE_ANON_KEY}
+        sync: false
