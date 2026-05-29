@@ -4,6 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import apiRouter from "./api";
 import { initializeSupabase } from "./lib/supabase";
+import { initializeKeepAlive } from "./keepAlive";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -50,6 +51,7 @@ async function startServer() {
 
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
+    initializeKeepAlive();
   });
 }
 
