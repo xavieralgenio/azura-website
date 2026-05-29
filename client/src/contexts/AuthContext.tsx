@@ -1,5 +1,5 @@
 import { createContext, type ReactNode, useContext, useEffect, useMemo, useState } from "react";
-import { supabase, type Session, type User } from "@/lib/supabase";
+import { getSupabaseClient, type Session, type User } from "@/lib/supabase";
 
 interface AuthContextValue {
   session: Session | null;
@@ -18,6 +18,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const supabase = getSupabaseClient();
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
+
     const init = async () => {
       const { data, error } = await supabase.auth.getSession();
       if (!error && data.session) {
@@ -30,9 +36,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     init();
 
-    const { data: listener } = supabase.auth.onAuthStateChange((event, payload) => {
-      const session = payload.session ?? null;
-      setSession(session);
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session ?? null);
       setUser(session?.user ?? null);
       if (session?.access_token) {
         window.localStorage.setItem("supabaseAccessToken", session.access_token);
@@ -41,7 +46,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     });
 
-    return () => listener.subscription.unsubscribe();
+    return () => data.subscription.unsubscribe();
   }, []);
 
   const value = useMemo(

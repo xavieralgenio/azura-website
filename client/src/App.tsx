@@ -14,7 +14,7 @@ import DashboardConversations from "./pages/DashboardConversations";
 import DashboardBookings from "./pages/DashboardBookings";
 import DashboardAnalytics from "./pages/DashboardAnalytics";
 import DashboardSettings from "./pages/DashboardSettings";
-
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function Router() {
   return (
@@ -28,6 +28,7 @@ function Router() {
       <Route path={"/dashboard/bookings"} component={DashboardBookings} />
       <Route path={"/dashboard/analytics"} component={DashboardAnalytics} />
       <Route path={"/dashboard/settings"} component={DashboardSettings} />
+      <Route path={"/privacy-policy"} component={PrivacyPolicy} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
