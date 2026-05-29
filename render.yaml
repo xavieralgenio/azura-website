@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: azura-ai-website
+    env: node
+    plan: free
+    buildCommand: pnpm install && pnpm build
+    startCommand: pnpm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: SUPABASE_URL
+        value: ${SUPABASE_URL}
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: ${SUPABASE_SERVICE_ROLE_KEY}
+      - key: VITE_SUPABASE_URL
+        value: ${VITE_SUPABASE_URL}
+      - key: VITE_SUPABASE_ANON_KEY
+        value: ${VITE_SUPABASE_ANON_KEY}
