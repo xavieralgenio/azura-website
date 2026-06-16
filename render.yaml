@@ -1,8 +1,8 @@
 # Render static site for the `better` frontend
 services:
-  - type: static
-    name: azura-better
-    env: static
+  - type: web
+    name: azura-ai-systems
+    runtime: static
     buildCommand: "pnpm install && pnpm build"
-    publishPath: "dist"
+    staticPublishPath: "dist"
     branch: main
